@@ -3,91 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nouvel Kirby | Art Portfolio</title>
+    <title>Nouvel Kirby | Visual Artist & Future Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
+        /* --- ELEGANT MINIMALIST BLACK, GRAY & WHITE DESIGN (CSS) --- */
+        
+        /* 1. Global Styles (The Gray Background) */
         body { 
-            font-family: 'Poppins', sans-serif; 
-            background-color: #fafafa; margin: 0; padding: 0; color: #333; 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; /* Super clean font */
+            background-color: #F5F5F7; /* Apple-inspired premium light gray background */
+            margin: 0; padding: 0; color: #333; /* Dark gray for text, for better readability */
+            letter-spacing: -0.01em;
         }
 
+        /* 2. Header (White background with deep Black text) */
         header { 
-            text-align: center; padding: 60px 20px 30px; 
-            background: white; border-bottom: 1px solid #eee;
+            text-align: center; padding: 100px 20px 60px; 
+            background: #FFFFFF; border-bottom: 1px solid #EAEAEA;
         }
         header h1 { 
-            font-family: 'Playfair Display', serif; 
-            margin: 0; font-size: 3rem; letter-spacing: -1px; 
+            font-family: 'Playfair Display', serif; /* Serif font for main title */
+            margin: 0; font-size: 3.5rem; letter-spacing: -2px; color: #111; /* Deep black elegant title */
+        }
+        header p { 
+            color: #888; margin-top: 15px; text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; font-weight: 500;
         }
 
-        /* ARTIST BIO SECTION */
+        /* 3. ARTIST BIO SECTION (2-Column Card) */
         .bio-section {
-            max-width: 900px; margin: 30px auto; padding: 25px;
-            background: white; border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-            display: flex; align-items: center; gap: 25px;
-            border: 1px solid #f0f0f0;
+            max-width: 1000px; margin: 60px auto; padding: 60px;
+            background: #FFFFFF; border-radius: 25px; /* Large white card for bio */
+            box-shadow: 0 10px 40px rgba(0,0,0,0.02);
+            display: flex; align-items: center; gap: 60px;
+            border: 1px solid #F0F0F0;
+            opacity: 0; transition: opacity 0.8s ease;
         }
 
+        .bio-section.loaded { opacity: 1; }
+
+        /* The Profile Picture */
+        .bio-pic-container {
+            flex: 0 0 200px; /* Fixed width for profile image area */
+            text-align: center;
+        }
         .bio-pic {
-            width: 130px; height: 130px; border-radius: 50%;
-            object-fit: cover; border: 3px solid #f0f0f0;
+            width: 180px; height: 180px; border-radius: 50%;
+            object-fit: cover; border: 8px solid #F5F5F7; /* White border to make it pop */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        .bio-text h2 { margin: 0 0 10px; font-size: 1.5rem; color: #111; }
-        .bio-text p { color: #666; line-height: 1.6; margin: 0; font-size: 0.95rem; white-space: pre-line; }
+        /* The Bio Text */
+        .bio-text { flex: 1; }
+        .bio-text h2 { 
+            margin: 0 0 30px; font-size: 2.2rem; color: #111; font-weight: 600; 
+            font-family: 'Playfair Display', serif; border-bottom: 2px solid #EAEAEA; display: inline-block; padding-bottom: 5px;
+        }
+        
+        /* Two-column bio text for desktop */
+        .bio-text-columns {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+        }
+        .bio-text p { 
+            color: #555; line-height: 1.8; margin: 0; font-size: 1rem; font-weight: 400; 
+            text-align: justify; white-space: pre-line;
+        }
 
-        /* --- THE GRID SYSTEM --- */
+        /* Mobile Adaptation for bio */
+        @media (max-width: 900px) {
+            .bio-section { flex-direction: column; text-align: center; padding: 40px; }
+            .bio-text-columns { grid-template-columns: 1fr; gap: 20px; }
+            .bio-pic-container { flex: 0 0 auto; margin-bottom: 20px; }
+            .bio-text h2 { font-size: 1.8rem; }
+            .bio-text p { text-align: center; }
+        }
+
+        /* 4. THE GALLERY */
+        .gallery-title { text-align: center; margin-top: 80px; font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 4px; color: #AAAAAA; }
+        
+        /* The Gallery Grid */
         .gallery-container {
-            max-width: 1200px; margin: 40px auto; padding: 0 20px;
+            max-width: 1200px; margin: 30px auto 80px; padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 25px;
+            grid-template-columns: repeat(3, 1fr); /* 3 Columns on Desktop */
+            gap: 40px;
+            align-items: start;
         }
 
-        /* RESPONSIVE: Sa Cellphone, magiging 1 COLUMN lang */
-        @media (max-width: 768px) {
-            .gallery-container { 
-                grid-template-columns: 1fr; 
-            }
-            .bio-section { 
-                flex-direction: column; text-align: center; margin: 20px;
-            }
-            header h1 { font-size: 2.2rem; }
-        }
+        /* Responsive Grid */
+        @media (max-width: 992px) { .gallery-container { grid-template-columns: repeat(2, 1fr); gap: 30px; } }
+        @media (max-width: 600px) { .gallery-container { grid-template-columns: 1fr; gap: 20px; } }
 
+        /* The Art Card (White card) */
         .art-card {
-            background: white; border-radius: 12px; overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-            transition: 0.3s; cursor: pointer; border: 1px solid #eee;
+            background: #FFFFFF; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03); /* Subtle initial shadow */
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); /* Smooth elegant animation */
+            cursor: pointer;
+            border: 1px solid #EAEAEA;
         }
-        .art-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-        .art-card img { width: 100%; height: 280px; object-fit: cover; display: block; }
-        .art-info { padding: 15px; }
-        .art-info h3 { margin: 0; font-size: 1.1rem; }
-        .art-info p { margin: 5px 0 0; color: #999; font-size: 0.85rem; }
+        
+        /* THE HOVER EFFECT: Pag-angat at Shadow */
+        .art-card:hover { 
+            transform: translateY(-10px) scale(1.01); /* Umangat ng 10px at lumaki ng 1% */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08); /* Mas matingkad na shadow para sa "visible" effect */
+        }
+        
+        /* FULL IMAGE PREVIEW SETTINGS (contain) */
+        .art-card img { 
+            width: 100%; height: auto; /* Uses image's natural height */
+            max-height: 500px; /* Limits portrait image height */
+            object-fit: contain; /* Shows full image, no cropping */
+            background-color: #FBFBFB; /* Very subtle gray background for non-square images */
+            display: block; transition: all 0.4s ease;
+        }
+        
+        .art-info { padding: 30px; text-align: left; }
+        .art-info h3 { 
+            margin: 0; font-size: 1.4rem; font-weight: 600; color: #111; 
+            font-family: 'Playfair Display', serif;
+        }
+        .art-info p { margin: 10px 0 0; color: #AAAAAA; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* MODAL POPUP */
+        /* 5. MODAL POPUP */
         #modal-overlay { 
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.9); z-index: 1000; backdrop-filter: blur(8px);
+            background: rgba(0,0,0,0.92); z-index: 1000; backdrop-filter: blur(15px);
         }
+
         #art-modal {
             display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 90%; max-width: 900px; background: white; z-index: 1001;
-            border-radius: 15px; overflow: hidden;
+            width: 95%; max-width: 1100px; background: #FFFFFF; z-index: 1001;
+            border-radius: 30px; overflow: hidden; animation: fadeInModal 0.5s ease;
         }
+
+        @keyframes fadeInModal { from { opacity: 0; transform: translate(-50%, -48%); } to { opacity: 1; transform: translate(-50%, -50%); } }
+
         .modal-content { display: flex; flex-wrap: wrap; }
-        .modal-left { flex: 1.2; background: #000; display: flex; align-items: center; justify-content: center; }
-        .modal-left img { width: 100%; max-height: 80vh; object-fit: contain; }
-        .modal-right { flex: 1; padding: 40px; position: relative; }
-        .close-btn { position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #999; }
-        .status-badge { display: inline-block; padding: 4px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-bottom: 15px; }
-        .available { background: #d1fae5; color: #065f46; }
-        .sold { background: #fee2e2; color: #991b1b; }
+        .modal-left { flex: 1.4; min-width: 300px; background: #000; display: flex; align-items: center; justify-content: center; }
+        .modal-left img { width: 100%; max-height: 85vh; object-fit: contain; padding: 20px; }
+        
+        .modal-right { flex: 1; padding: 60px; min-width: 300px; position: relative; display: flex; flex-direction: column; justify-content: center; }
+
+        .status-badge { 
+            display: inline-block; padding: 8px 18px; border-radius: 50px; 
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-bottom: 25px; align-self: flex-start;
+        }
+        .available { background: #E6FFFA; color: #065F46; }
+        .sold { background: #FFF5F5; color: #991B1B; }
+
+        .close-btn { 
+            position: absolute; top: 30px; right: 30px; background: none; border: none; 
+            font-size: 2rem; cursor: pointer; color: #CCCCCC; transition: color 0.2s; font-weight: 300;
+        }
+        .close-btn:hover { color: #111; }
     </style>
 </head>
 <body>
@@ -97,77 +168,93 @@
         <p>Visual Artist & Future Engineer</p>
     </header>
 
-    <div class="bio-section" id="bio-container"></div>
+    <div class="bio-section" id="bio-container">
+        </div>
 
-    <div class="gallery-container" id="main-gallery"></div>
+    <div class="gallery-title">The Gallery</div>
+
+    <div class="gallery-container" id="main-gallery">
+        </div>
 
     <div id="modal-overlay" onclick="closeModal()"></div>
     <div id="art-modal">
         <button class="close-btn" onclick="closeModal()">✕</button>
         <div class="modal-content">
-            <div class="modal-left"><img id="modal-img" src=""></div>
+            <div class="modal-left">
+                <img id="modal-img" src="" alt="">
+            </div>
             <div class="modal-right">
                 <div id="modal-status" class="status-badge"></div>
-                <h2 id="modal-title" style="margin:0; font-family: 'Playfair Display', serif; font-size: 2rem;"></h2>
-                <p id="modal-desc" style="color: #666; line-height: 1.6; margin: 20px 0; white-space: pre-line;"></p>
-                <h3 id="modal-price" style="font-size: 1.4rem; color: #111;"></h3>
+                <h2 id="modal-title" style="margin:0; font-family: 'Playfair Display', serif; font-size: 2.5rem; letter-spacing: -1px;"></h2>
+                <p id="modal-desc" style="color: #666; line-height: 1.8; margin: 30px 0; font-size: 1.05rem; white-space: pre-line;"></p>
+                <hr style="border:0; border-top: 1px solid #eee; margin-bottom: 20px;">
+                <h3 id="modal-price" style="font-size: 1.8rem; color: #111; margin: 0;"></h3>
             </div>
         </div>
     </div>
 
     <script>
-        // --- 1. PROFILE SETTINGS ---
+        /* --- DYNAMIC PROFILE DATA (Edit Profile here!) --- */
         const artistProfile = {
-            profilePic: "profile.jpg",
+            profilePic: "profile.jpg", // <--- *** PALITAN MO ITO NG PICTURE MO (e.g., images/my-photo.jpg) ***
             title: "About Nouvel Kirby",
-            // Ginamitan ko ng Backticks (`) para pwede ang multiple lines
             bio: `He is a student at Lyceum of Subic Bay, Inc. whose love for art began in junior high through the Special Program in the Arts at Subic National High School. He works mainly with graphite, charcoal, and acrylics.
 
             Over the years, he has accepted art commissions to buy his own materials, allowing him to keep practicing, improving, and challenging himself.
 
-            For Nouvel, art is more than just creating something nice to look at — it's about showing emotions and telling stories in every piece. He is dedicated to growing as an artist and making works that connect with people.`
+            For Nouvel, art is more than just creating something nice to look at — it's about showing emotions and telling stories in every piece. He is dedicated to growing as an artist and making works that connect with people.` // <--- *** PALITAN MO ITO NG IYONG BIO ***
         };
 
-        // --- 2. ARTWORKS LIST ---
+        /* --- DYNAMIC ART DATA (Edit/Insert Artwork here) --- */
         const myArtworks = [
             {
                 title: "A Sovereign Lady",
                 price: "P10,000",
-                description: "A detailed portrait focusing on the grace and strength of the subject.",
+                description: "A digital piece exploring fluid forms and bold color gradients.",
                 status: "Available",
-                image: "art1.jpg"
+                image: "art1.jpg" // Make sure this matches your file in 'images' folder
             },
             {
                 title: "Charcoal Study",
                 price: "Sold",
-                description: "Exploring shadows and highlights using traditional charcoal.",
+                description: "Experimental brushwork mimicking water and sand textures.",
                 status: "Sold",
                 image: "art2.jpg"
             },
             {
                 title: "Emotional Reflection",
                 price: "Sold",
-                description: "A piece that represents personal growth through art.",
+                description: "Description of your third art here...",
                 status: "Sold",
                 image: "art3.jpg"
             }
+            // Add more blocks like the one above to add new art!
         ];
 
-        // --- 3. AUTO-LOADER ---
+        /* --- LOGIC (Do not change) --- */
+        
+        // 1. Load Profile
         const bioContainer = document.getElementById('bio-container');
         bioContainer.innerHTML = `
-            <img src="${artistProfile.profilePic}" class="bio-pic">
+            <div class="bio-pic-container">
+                <img src="${artistProfile.profilePic}" alt="Artist Profile" class="bio-pic">
+            </div>
             <div class="bio-text">
                 <h2>${artistProfile.title}</h2>
-                <p>${artistProfile.bio}</p>
+                <div class="bio-text-columns">
+                    <p>${artistProfile.bio}</p>
+                </div>
             </div>
         `;
+        bioContainer.classList.add('loaded'); // Show the bio-section smoothly
 
+        // 2. Load Gallery
         const gallery = document.getElementById('main-gallery');
+
         myArtworks.forEach((art, index) => {
             gallery.innerHTML += `
                 <div class="art-card" onclick="openModal(${index})">
-                    <img src="${art.image}">
+                    <img src="${art.image}" alt="${art.title}">
                     <div class="art-info">
                         <h3>${art.title}</h3>
                         <p>${art.status}</p>
@@ -176,15 +263,18 @@
             `;
         });
 
+        // 3. Modal Functionality
         function openModal(index) {
             const art = myArtworks[index];
             document.getElementById('modal-title').innerText = art.title;
             document.getElementById('modal-desc').innerText = art.description;
             document.getElementById('modal-price').innerText = "Price: " + art.price;
             document.getElementById('modal-img').src = art.image;
-            const badge = document.getElementById('modal-status');
-            badge.innerText = art.status;
-            badge.className = "status-badge " + art.status.toLowerCase();
+            
+            const statusBadge = document.getElementById('modal-status');
+            statusBadge.innerText = art.status;
+            statusBadge.className = "status-badge " + art.status.toLowerCase();
+
             document.getElementById('modal-overlay').style.display = 'block';
             document.getElementById('art-modal').style.display = 'block';
         }
