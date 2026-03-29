@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Art Gallery</title>
+    <style>
+        /* This is the CSS (The Design) */
+        body { font-family: sans-serif; background: #f4f4f4; text-align: center; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px; }
+        .card { background: white; padding: 15px; border-radius: 10px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .card img { width: 100%; border-radius: 5px; }
+        
+        /* The Pop-up (Modal) Styles */
+        #details-panel { 
+            display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: white; padding: 30px; box-shadow: 0 0 50px rgba(0,0,0,0.5); z-index: 10; border-radius: 15px; width: 80%; max-width: 500px;
+        }
+        #overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 5; }
+    </style>
+</head>
+<body>
+
+    <h1>My Art Growth Project</h1>
+    <p>Click an artwork to see details</p>
+
+    <div class="grid" id="gallery"></div>
+
+    <div id="overlay" onclick="closeArt()"></div>
+    <div id="details-panel">
+        <img id="pop-img" src="" style="width:100%">
+        <h2 id="pop-title"></h2>
+        <p id="pop-desc"></p>
+        <h3 id="pop-price"></h3>
+        <p id="pop-status"></p>
+        <button onclick="closeArt()">Close</button>
+    </div>
+
+    <script>
+        // STEP 3: DATA - This is where you "insert" your art info!
+        const myArt = [
+            { title: "First Masterpiece", price: "P1,000", desc: "My first try at digital art.", status: "Available", img: "art1.jpg" },
+            { title: "Evening Hues", price: "P2,500", desc: "A study on lighting.", status: "Sold", img: "art2.jpg" }
+        ];
+
+        // This part automatically creates the cards for you
+        const gallery = document.getElementById('gallery');
+        myArt.forEach((item, index) => {
+            gallery.innerHTML += `
+                <div class="card" onclick="showArt(${index})">
+                    <img src="${item.img}">
+                    <h3>${item.title}</h3>
+                </div>
+            `;
+        });
+
+        function showArt(index) {
+            const item = myArt[index];
+            document.getElementById('pop-title').innerText = item.title;
+            document.getElementById('pop-desc').innerText = item.desc;
+            document.getElementById('pop-price').innerText = "Price: " + item.price;
+            document.getElementById('pop-status').innerText = "Status: " + item.status;
+            document.getElementById('pop-img').src = item.img;
+            document.getElementById('details-panel').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closeArt() {
+            document.getElementById('details-panel').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
